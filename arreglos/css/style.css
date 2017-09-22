@@ -1,0 +1,19 @@
+.name{
+	color:red;
+	font-size: 24px
+}
+.cuadrado{
+	width: 100px;
+	height: 100px;
+	margin: 20px auto;
+	border: 1px solid;
+}
+.cars{
+	padding: 15px;
+	background: #2d2d2d;
+	color:white;
+	margin: 20px auto;
+}
+.cars p {
+	margin:0;
+}

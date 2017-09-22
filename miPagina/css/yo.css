@@ -1,0 +1,38 @@
+.myPerfil{
+    width: 400px;
+    height: 450px;
+    background: #214760;
+    margin:100px auto; 
+    border-radius:10px;
+    position: relative;
+}
+.myPhoto{
+    background: red;
+    height: 150px;
+    width: 150px;
+    border-radius:50%;
+    position: absolute;
+    left: 125px;
+    top: 30px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
+    background-image: url('../img/perfil.jpg')
+}
+.myPerfil .info-perfil{
+    padding: 10px;
+    color: white;
+    top:180px;   
+    position: absolute;
+}
+.myPerfil a{
+    color:silver;
+    text-decoration: none;
+    cursor: pointer;
+}
+.myPerfil a:hover{
+    color: mediumaquamarine;
+}
+.text-center{
+    text-align: center;
+}
