@@ -1,7 +1,6 @@
 <?php
 class Operaciones{
-    public $num1;
-    public $num2;
+    public $num1, $n2;
 
     function __construct($n1, $n2){
         $this->num1 = $n1;
