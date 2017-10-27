@@ -10,7 +10,7 @@
 <?php
 $n = $_POST["n"];
 
-echo "<form method='GET' action='multiplicacion.php'>";
+echo "<form method='POST' action='multiplicacion.php'>";
 
 for($i=0; $i<$n; $i++){
     echo "<span>Dato".$i." : <span>";
