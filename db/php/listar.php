@@ -12,14 +12,12 @@
     <title>LISTAR</title>
 </head>
 <body>
- <h2>USUARIO: <?php session_start(); echo $_SESSION['name']; ?></h2>   
-<h1>LISTA DE UNIVERSITARIOS</h1>
+    <h2>USUARIO: <?php session_start(); echo $_SESSION['name']; ?></h2>   
+    <h1>LISTA DE UNIVERSITARIOS</h1>
 <?php
-if($_SESSION['nivel'] == 1) echo "<a href='../insetar.html' class='btn red'>Insertar Universitarios</a><br>";
-?>
 
+if($_SESSION['nivel'] == 1) echo "<a href='../insetar.html' class='btn blue'>Insertar Universitarios</a><br>";
 
-<?php
 require('conexion.php'); //llama al archivo que contiene la conexion de base de datos
 
 
@@ -28,7 +26,7 @@ $result = $con->query($sql); // realiza la consulta a db con el script sql
 //var_dump($result);
 if($result){ // verifica si se realizo la consulta correctamente
     if ($result->num_rows > 0) { //verifica si el numero de filas devuelto por la db es mayor a 0
-        // output data of each row
+        //imprime una tabla 
         echo "<table border='1'>";
         echo "<tr>";
         echo "<td>ID</td>";

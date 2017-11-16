@@ -1,10 +1,10 @@
 <?php
-$con = mysqli_connect("localhost","root","","university");
+$con = mysqli_connect("localhost","root","","university"); // se incia conexion con db, university
 
 // Check connection
 if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
+  } 
 
 ?>
