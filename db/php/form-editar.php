@@ -9,49 +9,31 @@
     <!-- javascript de materialize para los efectos y funcionaliza, no es indispensable -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     
-    <title>LISTAR</title>
+    <title>editar</title>
 </head>
 <body>
- <h2>USUARIO: <?php session_start(); echo $_SESSION['name']; ?></h2>   
-<h1>LISTA DE UNIVERSITARIOS</h1>
-<?php
-if($_SESSION['nivel'] == 1) echo "<a href='../insetar.html' class='btn red'>Insertar Universitarios</a><br>";
-?>
-
-
+<h1>EDITAR</h1>
 <?php
 require('conexion.php'); //llama al archivo que contiene la conexion de base de datos
-
-
-$sql = 'select * from universitario'; // script sql que lista la tabla universitario
+$id = $_GET["id"];
+$sql =   'select * from universitario where id='.$id; // script sql que lista la tabla universitario
 $result = $con->query($sql); // realiza la consulta a db con el script sql
 //var_dump($result);
 if($result){ // verifica si se realizo la consulta correctamente
     if ($result->num_rows > 0) { //verifica si el numero de filas devuelto por la db es mayor a 0
-        // output data of each row
-        echo "<table border='1'>";
-        echo "<tr>";
-        echo "<td>ID</td>";
-        echo "<td>Nombre</td>";
-        echo "<td>Apellido</td>";
-        echo "<td>CU</td>";
-        echo "<td>Edad</td>";
-        echo "<td>Editar</td>";
-        echo "<td>Eliminar</td>";
-        echo "</tr>";
+
         while($row = $result->fetch_assoc()) { // bucle que itera todas las filas que devolvio la db, en forma de arreglo asociativo
-            // impresion de los datos devueltos por la db
-            echo "<tr>";
-            echo "<td>".$row["id"]."</td>";
-            echo "<td>".$row["name"]."</td>";
-            echo "<td>".$row["last_name"]."</td>";
-            echo "<td>".$row["cu"]."</td>";
-            echo "<td>".$row["age"]."</td>";
-            echo "<td><a class='btn green' href='form-editar.php?id=".$row['id']."'>Editar</td>";
-            echo "<td> <a class='btn red' href='eliminar.php?id=".$row["id"]."'>Eliminar</a></td>"; // link que manda el id por GET de cada tupla al arichivo eliminar
-            echo "</tr>";
+ ?>
+ <form action="editar.php" method="POST">
+    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+    <span>Nombre</span><input type="text" name="name" value="<?php echo $row['name']; ?>" > <br><br>
+    <span>apellido</span><input type="text" name="last_name" value="<?php echo $row['last_name']; ?>"> <br><br>
+    <span>CU</span><input type="text" name="cu" value="<?php echo $row['cu']; ?>"> <br><br>
+    <span>Edad</span><input type="text" name="age" value="<?php echo $row['age']; ?>"> <br><br>
+    <input type="submit" value="Editar">
+ </form>
+ <?php               
         }
-        echo "</table>";
     } else { // en caso que el resultado no contenga datos
         echo "No existen datos";
     }
@@ -64,3 +46,9 @@ $con->close(); // cierre de la db
 ?>
 </body>
 </html>
+
+<?php
+
+
+
+?>

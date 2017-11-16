@@ -12,48 +12,33 @@
     <title>LISTAR</title>
 </head>
 <body>
- <h2>USUARIO: <?php session_start(); echo $_SESSION['name']; ?></h2>   
-<h1>LISTA DE UNIVERSITARIOS</h1>
+<!-- <h1>LISTA DE UNIVERSITARIOS</h1>
+<a href="../insetar.html" class="btn red">Insertar Universitarios</a><br> -->
 <?php
-if($_SESSION['nivel'] == 1) echo "<a href='../insetar.html' class='btn red'>Insertar Universitarios</a><br>";
-?>
-
-
-<?php
+session_start();
 require('conexion.php'); //llama al archivo que contiene la conexion de base de datos
 
+$user = $_POST['user'];
+$pass = $_POST['pass'];
 
-$sql = 'select * from universitario'; // script sql que lista la tabla universitario
+$sql = "select * from usuario where user = '".$user."' and password = '".$pass."'"; // script sql que lista la tabla universitario
 $result = $con->query($sql); // realiza la consulta a db con el script sql
 //var_dump($result);
 if($result){ // verifica si se realizo la consulta correctamente
     if ($result->num_rows > 0) { //verifica si el numero de filas devuelto por la db es mayor a 0
-        // output data of each row
-        echo "<table border='1'>";
-        echo "<tr>";
-        echo "<td>ID</td>";
-        echo "<td>Nombre</td>";
-        echo "<td>Apellido</td>";
-        echo "<td>CU</td>";
-        echo "<td>Edad</td>";
-        echo "<td>Editar</td>";
-        echo "<td>Eliminar</td>";
-        echo "</tr>";
         while($row = $result->fetch_assoc()) { // bucle que itera todas las filas que devolvio la db, en forma de arreglo asociativo
-            // impresion de los datos devueltos por la db
-            echo "<tr>";
-            echo "<td>".$row["id"]."</td>";
-            echo "<td>".$row["name"]."</td>";
-            echo "<td>".$row["last_name"]."</td>";
-            echo "<td>".$row["cu"]."</td>";
-            echo "<td>".$row["age"]."</td>";
-            echo "<td><a class='btn green' href='form-editar.php?id=".$row['id']."'>Editar</td>";
-            echo "<td> <a class='btn red' href='eliminar.php?id=".$row["id"]."'>Eliminar</a></td>"; // link que manda el id por GET de cada tupla al arichivo eliminar
-            echo "</tr>";
+            $name = $row['name'];
+            $nivel = $row['nivel'];
+            $_SESSION['name'] = $name;
+            $_SESSION['nivel'] = $nivel;
         }
-        echo "</table>";
+        //echo $name." ".$nivel;
+        echo "<center><h1>Bienvenido, ".$name." : )  <h1></center>";
+        echo '<meta http-equiv="refresh" content="2,URL=listar.php">';
+
     } else { // en caso que el resultado no contenga datos
-        echo "No existen datos";
+        echo "<center><h1>Error en la autenticacion : |<h1></center>";
+        echo '<meta http-equiv="refresh" content="2,URL=../index.html">';
     }
 }else{ // en caso que la consulta  sql haya fallado
     echo "error en la consulta";
